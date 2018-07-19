@@ -1,0 +1,89 @@
+插入数据:
+insert into emp(empno,ename,sal,deptno) values(1001,'Tom',3000,10);
+
+L> insert into emp(empno,ename,sal,deptno) values(&empno,&ename,&sal,&deptno);
+输入 empno 的值:  1002
+输入 ename 的值:  'Mary'
+输入 sal 的值:  2000
+输入 deptno 的值:  20
+
+上面两种方式都可以插入数据.
+
+SQL> select empno,ename,sal,&t
+  2  from emp;
+输入 t 的值:  job
+原值    1: select empno,ename,sal,&t
+新值    1: select empno,ename,sal,job
+
+SQL> select * from &t;
+输入 t 的值:  dept
+原值    1: select * from &t
+新值    1: select * from dept
+
+
+SQL> create table emp10 as select * from emp where 1=2;
+表已创建。创建的表和emp表里面的字段是一模一样的;
+
+SQL> --一次性将emp中，所有10号部门的员工插入到emp10中
+SQL> insert into emp10 select * from emp where deptno=10;
+
+SQL> /*
+SQL> 海量插入数据：
+SQL> 1、数据泵（PLSQL程序）
+SQL>    dbms_datapump(程序包)
+SQL> 2、SQL*Loader
+SQL> 3、外部表
+SQL> */
+
+
+SQL> /*
+SQL> delete和truncate的区别
+SQL> 1、delete逐条删除；truncate先摧毁表 再重建2
+SQL> 2、（*）delete是DML  truncate是DDL
+SQL>         (可以回滚)         （不可以回滚）
+SQL> 3、delete不会释放空间 truncate会
+SQL> 4、delete会产生碎片 truncate不会
+SQL> 5、delete可以闪回(flashback)  truncate不可以
+SQL> */
+--flashback其实是一种恢复
+
+
+SQL> /*
+SQL> Oracle中的事务
+SQL> 1、起始标志: 事务中的第一条DML语句
+SQL> 2、结束标志：提交： 显式  commit  隐式： 正常退出 DDL DCL
+SQL>             回滚： 显式 rollback   隐式： 非正常退出 掉电  宕机
+
+
+
+
+
+SQL> savepoint a;
+
+保存点已创建。
+
+SQL> rollback to savepoint a;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

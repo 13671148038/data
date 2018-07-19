@@ -1,0 +1,19 @@
+不言而喻,行级触发器会针对DML操作所影响的每一行数据都进行一次触发器.创建这种触发器是,必须在语法中使用for each row
+这个选项.使用行级触发器的一个典型应用就是给数据表生成主键值,下面就来讲解这个典型应用的实现过程.
+首先创建一张带有主键表,例子:
+create table goods(
+	id int primary key,
+	good_name varchar2(50)
+);
+第二步:创建生成不重复序列用来获取主键:
+ create sequence seq_goods_id;
+第三步创建触发器:
+create or replace trigger tri_insert_goods  --创建触发器tri_insert_goods
+	before insert			    --插入之前执行	
+	on goods			    --绑定插入的操作表	
+	for each row			    --行级触发器关键字
+begin
+	select seq_id.nextval		    --每次插入一条数据的时候会生成一个主键并赋给当前插入的数据中
+		into :new.id
+		from dual;
+end tri_insert_goods;

@@ -1,0 +1,18 @@
+create or replace trigger tri_dept            --创建触发器tri_dept
+  before insert or update or delete	      --在插入,更新,删除 操作之前执行触发器	
+  on dept 				      --绑定表	
+declare
+  -- local variables here
+  var_tag varchar2(10);
+begin
+  if inserting then
+    var_tag:='插入';
+  elsif updating(字段名字) then               --可以在括号里面加上字段名字的意思指定该名字被修改后触发;
+    var_tag :='更新';
+  elsif deleting then
+    var_tag :='删除';
+  end if;
+  insert into dept_log values(
+  var_tag,sysdate
+  );      
+end tri_dept;

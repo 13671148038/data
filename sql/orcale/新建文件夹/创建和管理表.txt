@@ -1,0 +1,12 @@
+show recyclebin;//查看回收站
+SQL> --清空回收站
+SQL> purge recyclebin;
+
+当使用drop table 表明 ;删除表的时候表会别删除到回收占中;查看回收站可以看到
+可以同过 flashback table 表明 to before drop; 进行删除到回收站里面的数据进行恢复;
+ 
+
+如果把回收站清空的话 将恢复不了;
+
+
+可以通过 drop table 表明 purge;//这个是删除表的时候会不会把表放到回收站中,是直接删除不可找回.

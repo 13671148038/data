@@ -1,0 +1,116 @@
+无参数存储过程:
+create or replace procedure pro_insertDept is
+begin
+  insert into dept values(77,'市场拓展部','JILIN'); --插入数据记录
+  commit;                                          --提交数据
+  dbms_output.put_line('插入新记录成功!');         --提示插入记录成功
+end pro_insertDept;
+
+
+有输入参数的存储过程:
+create or replace procedure insert_dept(
+num_deptno in number,       --定义in模式的变量,它存储部门编号
+var_ename in varchar2,      --定义in模式的变量,它存储部门名称
+var_loc in varchar2         --定义in模式的变量,它存储地点
+) is
+begin
+  insert into dept
+  values(num_deptno,var_ename,var_loc);
+  commit;
+end insert_dept;
+
+调用方式:
+1. execute insert_dept(var_ename=>'采购部',var_loc=>'成都',num_deptno=>15);
+2. execute insert_dept(28,'工程部','洛阳');
+3. execute insert_dept(29,var_loc=>'济南',var_ename=>'测试部');
+
+out模式存储过程:
+create or replace procedure select_dept(
+num_dept in number,                               --定义in模式变量,要求输入部门编号
+var_dname out dept.dname%type,                    --定义out模式变量,可以存储部门名称并输出 
+var_loc out dept.loc%type) is                     --定义out模式变量,可以存储部门位置并输出
+begin
+  select dname,loc into var_dname,var_loc
+  from dept
+  where deptno = num_dept;                        --检索某个部门编号的部门信息
+exception
+  when no_data_found then                         --若select语句无返回记录
+    dbms_output.put_line('输入的部门编号不存在'); --输出信息
+end select_dept;
+调用:
+1. plsql调用:
+ declare
+   var_dname dept.dname%type;
+   var_loc dept.loc%type;
+   begin
+   select_dept(77,var_dname,var_loc);
+   dbms_output.put_line(var_dname||'位于'||var_loc);
+   end;
+2. sql.plus调用:
+SQL> variable var_dname varchar2(50);  --声明变量
+SQL> variable var_loc varchar2(50);    --声明变量	
+SQL> exec select_dept(77,:var_dname,:var_loc);--使用exec执行存储过程
+print var_dname var_loc;  --使用print打印输出变量 var_dname和var_loc
+SQL> select :var_dname,:var_loc from dual;--使用select查询变量的值.
+
+
+in out 模式参数:
+create or replace procedure pro_square(
+num in out  number, 
+flag in boolean
+) is
+i int:=2;
+begin
+ if flag then
+   num:=power(num,i);
+ else
+   num:=sqrt(num);
+ end if;     
+end pro_square;
+调用;
+declare 
+  var_result number:=3;
+  boo_flag boolean:=false;
+begin
+  -- Test statements here
+  pro_square(var_result,boo_flag);
+  dbms_output.put_line(var_result);
+end;
+结果是:1.73205080756887729352744634150587236694
+
+在定义输入参数是可以指定默认值:
+var_dname in varchar2 default '综合部',
+在有执行时没有指定参数的时候会使用这个默认值;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

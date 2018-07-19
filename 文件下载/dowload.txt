@@ -1,0 +1,27 @@
+@RequestMapping("download")
+	public void download(HttpServletRequest request, HttpServletResponse response,String filename){
+		try {
+				String agent = request.getHeader("User-Agent");
+				String filenameEncoder = FileUtil.encodeDownloadFilename(filename, agent);
+				//要下载的这个文件的类型-----客户端通过文件的MIME类型去区分类型
+				response.setContentType(request.getServletContext().getMimeType(filename));
+				//告诉客户端该文件不是直接解析 而是以附件形式打开(下载)----filename="+filename 客户端默认对名字进行解码
+				response.setHeader("Content-Disposition", "attachment;filename="+filenameEncoder);
+				//获取文件的绝对路径
+				String path = request.getServletContext().getRealPath("troubleImages/"+filename);
+				//获得该文件的输入流
+				InputStream in = new FileInputStream(path);
+				//获得输出流---通过response获得的输出流 用于向客户端写内容
+				ServletOutputStream out = response.getOutputStream();
+				//文件拷贝的模板代码
+				int len = 0;
+				byte[] buffer = new byte[1024];
+				while((len=in.read(buffer))>0){
+					out.write(buffer, 0, len);
+				}
+					in.close();
+				} catch (IOException e) {
+					logger.info("资料下载", e);
+					e.printStackTrace();
+				}
+	}

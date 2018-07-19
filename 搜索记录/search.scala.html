@@ -1,0 +1,395 @@
+@(page:PageInfo[FileInfo],pageCount:Int,fileSearch:FileSearch,userId:String,highSearch:Boolean)
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分布式数据管理平台</title>
+    <meta  name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href='@routes.Assets.at("css/global.css")'>
+    <link rel="stylesheet" type="text/css" href='@routes.Assets.at("js/bootstrap/dist/css/bootstrap.min.css")'>
+    <link rel="stylesheet" type="text/css" href='@routes.Assets.at("css/iconfont.css")'>
+    <link rel="stylesheet" type="text/css" href='@routes.Assets.at("css/form.css")'>
+    <link rel="stylesheet" href='@routes.Assets.at("css/share.css")'  type="text/css">
+    <link rel="stylesheet" type="text/css" href='@routes.Assets.at("css/biaoge.css")'>
+    <script type="text/javascript" src='@routes.Assets.at("js/iconfont.js")'></script>
+    <link rel="stylesheet" href='@routes.Assets.at("layui/css/layui.css")'  type="text/css">
+    <script src='@routes.Assets.at("js/iconfont.js")'  type="text/javascript"></script>
+    <script src='@routes.Assets.at("js/jquery.min.js")' type="text/javascript"></script>
+    <script src='@routes.Assets.at("jquery/dist/jquery.js")'></script>
+    <script src='@routes.Assets.at("layui/layui.js")'  type="text/javascript"></script>
+    <style type="text/css">
+        .icon {
+            width: 2em; height: 2em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+            color: white;
+        }
+        .iconfont{
+            font-size: 24px;
+        }
+        .zt{
+            font-size: 16px;
+        }
+        .wz{
+            color: #0280db;
+        }
+        .wrap{
+            background-color: #e9edf6;
+        }
+        .search_button{
+            color: white;
+            background-color: #2387b0;
+            border: 0;
+            width: 100px;
+            height: 40px;
+            line-height: 34px;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="content">
+        <div class="place">
+            <i class="iconfont icon-zhongxinweizhi wz"></i>
+            当前位置：<span>数据检索</span>
+        </div>
+        <div class="share">
+            <div class="share_pa" style="width: 96%;height: 650px;">
+                <div style="display:block ">
+                    <ul class="dw">
+                        <li>数据检索</li>
+                    </ul>
+                    <form id="form1" action="/searchFil/search">
+                        <ul class="share_seek" id="ul1">
+                            <li>文件大小：
+                                <input type="text" class="high_search_input" style="width: 200px;height: 38px;margin-right: 20px;" name="fileSize" id="fileSize" value="@fileSearch.fileSize"/>
+                                <input type="hidden" id="inpFlag" value="false"/>
+                                <input type="hidden" name="highSearch" id="highSearch" value="@highSearch"/>
+                            </li>
+                            <li>文件类型：
+                                <input type="text" class="high_search_input" style="width: 200px;height: 38px;margin-right: 20px;" name="fileType" value="@fileSearch.fileType"/>
+                            </li>
+                            <li>创建时间：
+                                <input type="text" class="high_search_input" id="createTime" style="width: 200px;height: 38px;margin-right: 20px;" name="createTime" value="@fileSearch.createTime"/>
+                            </li>
+                        </ul>
+                        <ul class="share_seek">
+                            <li id="ul2">修改时间：
+                                <input type="text" class="high_search_input" id="upTime" style="width: 200px;height: 38px;margin-right: 20px;" name="upTime" value="@fileSearch.upTime"/>
+                            </li>
+                            <li>
+                                快速检索：
+                                <span><input type="text" id="keyWord"  class="search_input" class="" style="width:200px;height: 38px;margin-right: 20px;" name="fileName" value="@fileSearch.fileName" />
+                            <input type="button" class="search_button" onclick="checkTab()"  value="检  索"/>
+                            <input type="button" class="search_button" value="高级检索" onclick="setDetailMsgRow('highRow',this)"/></span>
+                            </li>
+                        </ul>
+                        <div id="selectContent" style="margin-left: 80px;width: 200px; height:255px;display:none;position: absolute;background-color: white;overflow:auto;border: 1px solid #CCC">
+                            <div id="record"></div>
+                            <div id="deleteRecord" onclick="deleteRecord()" style="text-align: center;color: #CCC">清空浏览记录</div>
+                        </div>
+                        @Option(page.resultList).filterNot(_.isEmpty).map{ ress =>
+                        <table border="0" style="width: 100%">
+                            <tr style="width: 100%;height: 40px;background-color: #f0f0f0">
+                                <th style="width: 30%;text-align: center;">文件名</th>
+                                <th style="width: 10%;;text-align: center;border-right: 2px solid white;border-left: 2px solid white">文件类型</th>
+                                <th style="width: 10%;text-align: center;">文件大小</th>
+                                <th style="width: 25%;text-align: center;border-right: 2px solid white;border-left: 2px solid white">创建时间</th>
+                                <th style="width: 25%;text-align: center">修改时间</th>
+                            </tr>
+                            @ress.map{
+                            case (res) => {
+                            <tr style="width: 100%;height: 40px;text-align: center">
+                                <td>@res.path_name</td>
+                                <td>@res.file_type</td>
+                                <td>@res.file_size</td>
+                                <td>@res.create_time</td>
+                                <td>@res.update_time</td>
+                            </tr>
+                            }
+                            }
+                        </table>
+                        <div  class="paging" id="paging" style="position: relative;margin-top: 60px;">
+                            <span><button id="backPage">上一页</button></span>
+                            <span>当前<input type="text" name="pageNum" id="pageNum" value="@page.pageNum">页/共 <i>@page.totalPage</i>页</span>
+                            <span><button id="nextPage">下一页</button></span>
+                            <span>每页<input type="text" name="pageCount" id="pageCount" value="@pageCount">条</span>
+                        </div>
+                        }.getOrElse {
+                        <div >
+                            <em>没有数据</em>
+                        </div>
+                        }
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var totalPage = @page.totalPage;
+    var totalCount = @page.totalCount;
+    var currentPage ="@page.pageNum" // 当前页
+    var userId = '@userId'
+    $(function () {
+        currentPage = currentPage*1
+        totalPage = totalPage*1
+        $("#pagenum").keyup(function () {
+            var regNeg  = /^[0-9]*[1-9][0-9]*$/
+            var pagenum = $("#pagenum").val()
+            var result = regNeg.test(pagenum)
+            if (!result){
+                $("#pagenum").val("")
+            }else{
+                if(pagenum<1){
+                    $("#pagenum").val(1)
+                }
+                if(pagenum>totalPage){
+                    $("#pagenum").val(totalPage)
+                }
+            }
+        })
+
+        // 上一页
+         $("#backPage").click(function () {
+            var pageNum = $("#pageNum").val();
+            if(pageNum-1<=1){
+                $("#pageNum").val(1);
+            }else{
+                $("#pageNum").val(pageNum-1);
+            }
+            $("#form1").submit();
+         })
+
+        // 下一页
+        $("#nextPage").click(function () {
+           var pageNum = $("#pageNum").val();
+           if(pageNum+1 >= totalPage){
+              $("#pageNum").val(totalPage);
+           }else{
+              $("#pageNum").val(pageNum+1);
+           }
+           $("#form1").submit();
+        })
+
+        if($("#highSearch").val()=="false"){
+            $("#ul1").css("display","none");
+            $("#ul2").css("display","none");
+        }else{
+            $("#ul1").css("display","");
+            $("#ul2").css("display","");
+        }
+
+        layui.use(['form', 'laydate'], function(){
+            var form = layui.form
+                ,laydate = layui.laydate;
+
+            //日期
+            laydate.render({
+                elem: '#createTime'
+            });
+            laydate.render({
+                elem: '#test1-1'
+                ,lang: 'en'
+            });
+            laydate.render({
+                elem: '#upTime'
+            });
+            laydate.render({
+                elem: '#test1-1'
+                ,lang: 'en'
+            });
+        });
+
+    });
+    $("#keyWord").click(function (e) {
+        stopPropagation(e)
+        $("#record").empty();
+        //获取kookie
+        var cookie = {};
+        var all = document.cookie
+        if(all){
+            var list = all.split(";")
+            for(var i =0;i<list.length;i++){
+                var c =list[i]
+                var p = c.indexOf("=")
+                var name=c.substring(0,p)
+                var value = c.substring(p+1)
+                value = decodeURIComponent(value)
+                cookie[name]=value;
+            }
+        }
+        var record = cookie[userId]
+        record = $.trim(record)
+        if (record){
+            var list = record.split("-")
+            var item = "";
+            $.each(list,function (index, value) {
+                item+='<div style="color: black" onclick="selectItem(this)">'+value+'</div>'
+            })
+            $("#record").append(item);
+            $("#selectContent").show()
+        }
+    })
+    function selectItem(info){
+            $("#keyWord").val(info.innerText)
+            $("#selectContent").hide()
+    }
+
+    //删除历史记录
+    function deleteRecord(){
+        //获取kookie
+        var cookie = {};
+        var all = document.cookie
+        if(all){
+            var list = all.split(";")
+            for(var i =0;i<list.length;i++){
+                var c =list[i]
+                var p = c.indexOf("=")
+                var name=c.substring(0,p)
+                var value = c.substring(p+1)
+                value = decodeURIComponent(value)
+                cookie[name]=value;
+            }
+        }
+        //删除浏览记录
+        cookie[userId]=encodeURIComponent(" ")
+        var res = JSON.stringify(cookie)
+        res = res.replace(/\":\"/g,"=")
+        res = res.replace(/\",\"/g,";")
+        res = res.replace(/{\"/g,"")
+        res = res.replace(/\"}/g,"")
+        document.cookie =res;
+        $("#selectContent").hide()
+    }
+
+    var flag = true
+    function setDetailMsgRow() {
+        if(flag){
+            $("#ul1").css("display","");
+            $("#ul2").css("display","");
+            $(".share_pa").css("height","750px");
+            $("#selectContent").css("margin-left","377px");
+            $("#highSearch").val("true")
+            flag = false;
+        }else{
+            $("#ul1").css("display","none");
+            $("#ul2").css("display","none");
+            $(".share_pa").css("height","650px");
+            $("#selectContent").css("margin-left","80px");
+            $("#highSearch").val("false")
+            flag = true;
+        }
+    }
+
+    function checkTab(){
+        var keyWord1 = $.trim($("#keyWord1").val())
+        var keyWord2 = $.trim($("#keyWord2").val())
+        var keyWord = keyWord1==""?keyWord2:keyWord1
+        if (keyWord){
+            var arrs = keyWord.split(" ");
+            var folders = "";//文件
+            var labels = "";//标签
+            var patt1 = new RegExp(":");
+            var patt2 = new RegExp("：");
+            var cnt = 0;
+            for(var i=0;i<arrs.length;i++){
+                if(arrs[i]!=""){
+                    if(patt1.test(arrs[i])||patt2.test(arrs[i])){
+                        if(labels!=""){
+                            labels += ",";
+                        }
+                        labels += arrs[i];
+                        cnt++;
+                    }else{
+                        if(folders!=""){
+                            folders += ",";
+                        }
+                        folders += arrs[i];
+                    }
+                }
+            }
+            if(cnt>3){
+                alert("检索的标签数不能超过3个！");
+                return false;
+            }
+
+            //获取kookie
+            var cookie = {};
+            var all = document.cookie
+            if(all){
+                var list = all.split(";")
+                for(var i =0;i<list.length;i++){
+                    var c =list[i]
+                    var p = c.indexOf("=")
+                    var name=c.substring(0,p)
+                    var value = c.substring(p+1)
+                    value = decodeURIComponent(value)
+                    cookie[name]=value;
+                }
+            }
+            var c = cookie[userId]
+            var list = []
+            if(c){
+                list = c.split("-")
+            }
+
+            //判断搜索记录有没有相同的
+            $.each(list,function (index, value) {
+                if(keyWord==value){
+                    list.splice(index,1)
+                }
+            })
+
+            var num = list.length
+            if(num<10){
+                list.unshift(keyWord)
+            }else{
+                list.pop();
+                list.unshift(keyWord)
+            }
+            var js = "";
+            num = list.length
+            $.each(list,function (index, value) {
+                if(num==index+1){
+                    js+=value
+                }else{
+                    js+=(value+"-")
+                }
+            })
+
+            cookie[userId]=encodeURIComponent(js)
+            var res = JSON.stringify(cookie)
+            res = res.replace(/\":\"/g,"=")
+            res = res.replace(/\",\"/g,";")
+            res = res.replace(/{\"/g,"")
+            res = res.replace(/\"}/g,"")
+            document.cookie =res;
+        }
+        var fileSize = $.trim($("#fileSize").val())
+        if(fileSize==""){
+            $("#fileSize").val(0)
+        }else{
+            $("#inpFlag").val(true)
+        }
+        $("#form1").submit();
+    }
+
+    function stopPropagation(e) {
+        if (e.stopPropagation)
+            e.stopPropagation();
+        else
+            e.cancelBubble = true;
+    }
+
+    $(document).bind('click',function(){
+        $('#selectContent').css('display','none');
+    });
+
+    $('#selectContent').bind('click',function(e){
+        stopPropagation(e);
+    });
+
+</script>
+</body>
+</html>

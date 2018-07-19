@@ -1,0 +1,19 @@
+
+Redis哈希看起来如何使用字段 - 值对来看待“散列”的外观：
+
+  1. hmset user:1000 username antirez birthyear 1977 verified 1  //添加散列数据类型,其中'user:1000'是key(键)后面的数据
+   都是成对出现的.
+   
+  2.  hget user:1000 username    //查询username,返回的结果是 antirez  
+
+  3.  hmget user:1000 username birthyear no-such-field      //查询多个字段
+
+  4.  hmgetall user:1000                                    //查询此键下的多有信息
+
+
+
+虽然散列可以方便地表示对象，但实际上可以放在散列内的字段数量没有实际限制（除了可用内存），
+所以您可以在应用程序内以多种不同方式使用散列。
+
+值得注意的是，小哈希值（即少量值较小的元素）在内存中以特殊的方式进行编码，使得它们非常有效。
+

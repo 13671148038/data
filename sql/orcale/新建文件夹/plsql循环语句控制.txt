@@ -1,0 +1,90 @@
+
+
+loop语句:或先执行一次循环体,然后再判断"exit when"关键字后面的条件表达式是true还是false,不同于java的是当when是true的时候跳出循环,
+例子:
+declare 
+  -- Local variables here
+  sum_i int:=0;
+  i int:=0;
+begin
+  -- Test statements here
+  loop
+    i:=i+1;
+    sum_i:=sum_i+i;
+    exit when i=100;
+    end loop;
+    dbms_output.put_line('前一百个自然数的和是:'||sum_i);
+end;结果是:前一百个自然数的和是:5050;
+
+
+
+while语句:和java的while语句的含义是一样的额
+例子:
+declare 
+  -- Local variables here
+  sum_i number:=0;
+  i number:=0;
+begin
+  -- Test statements here
+  while i<100 loop
+    i:=i+1;
+    sum_i:=sum_i+i;
+    end loop;
+    dbms_output.put_line(sum_i);
+end;
+
+for语句:是一个可预知循环次数的循环控制语句;
+例子:
+declare 
+  -- Local variables here
+  sum_i number:=0;                --定义整数变量,存储整数和.
+begin
+  -- Test statements here
+  for i in reverse 1..100 loop    --遍历前一百个自然数
+    if mod(i,2)=0 then          --判断是否是偶数
+      sum_i:=sum_i+i;             --计算偶数的和
+      end if;          
+    end loop;
+    dbms_output.put_line(sum_i);
+end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

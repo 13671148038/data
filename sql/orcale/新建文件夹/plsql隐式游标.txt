@@ -1,0 +1,17 @@
+在执行一个SQL语句的时候,Orcale会自动创建一个隐式游标.这个游标是内存中处理该语句的工作区域.
+隐式游标主要是处理数据操纵语句(如 UPDATE ,DELETE语句)的执行结果.由于隐式游标也有属性,当使用隐式游标
+的属性是,需要在属相前面加上隐式游标的默认名称--SQL.
+例子:
+declare 
+  -- Local variables here
+begin
+  -- Test statements here
+  update emp
+  set sal = sal*(1+0.2)
+  where job = 'SALESMAN';
+  if sql%notfound then			--使用游标属性判断是否有满足条件的数据
+    dbms_output.put_line('没有员工需要涨工资');
+   else
+     dbms_output.put_line('有'||sql%rowcount||'个员工需要涨工资20%'); 
+  end if;
+end;

@@ -1,0 +1,26 @@
+
+穿件函数:
+create or replace function get_avg_pay(num_deptno number) return number is
+  FunctionResult number;
+begin
+  select avg(sal) into FunctionResult from emp where deptno = num_deptno;
+  return(round(FunctionResult));
+exception
+  when no_data_found then
+    dbms_output.put_line('该部门编号不存在');  
+    return(0);
+end get_avg_pay;
+
+
+调用函数:
+set serveroutput on
+declare
+    avg_pay number; 
+begin
+  avg_pay:=get_avg_pay(10);
+  dbms_output.put_line(avg_pay);
+end;
+/
+
+删除函数:
+drop  function   fun_name;

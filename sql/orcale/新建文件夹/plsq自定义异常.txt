@@ -1,0 +1,37 @@
+
+
+错误编号异常:
+declare 
+ primary_iterant exception;                     --定义一个异常变量
+ pragma exception_init(primary_iterant,-00001); --关联错误号和异常变量名
+begin
+  -- Test statements here
+  /*向dept表中插入一条记录与已有主键值重复,以便已发异常*/
+  insert into dept values(10,'软件开发部','深圳');
+exception
+  when primary_iterant then                     --若Orcale捕获到的异常为-00001异常
+    dbms_output.put_line('主键不能重复!');      --输出异常描述信息
+end;
+
+
+
+
+
+业务逻辑异常:
+ declare 
+  null_exception exception;                             --声明一个exception类型的异常变量
+  dept_row dept%rowtype;                                --声明rowtype类型的变量dept_row
+begin
+  -- Test statements here
+  dept_row.deptno:=66;                                  --给部门编号变量赋值
+  dept_row.dname:='公关部';                             --给部门名称变量赋值
+  insert into dept
+  values(dept_row.deptno,dept_row.dname,dept_row.loc);  --向dept表中插入一条记录
+  if dept_row.loc is null then                          --判断"loc"是空值
+    raise null_exception;                               --引发null异常,程序转入exception部分
+    end if;  
+exception
+  when null_exception then                              --当raise已发的异常时null_exception时
+    dbms_output.put_line('loc 字段的值不允许为null');   --输入异常提示信息
+    rollback;                                           --回滚插入的数据记录
+  end;

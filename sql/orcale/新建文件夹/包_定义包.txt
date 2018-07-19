@@ -1,0 +1,8 @@
+create or replace package pack_emp is
+
+  function fun_avg_sal(num_deptno number) return number;		--定义的函数 只有定义了函数的名称 类似于java借口
+  procedure pro_regulate_sal(var_job varchar2,num_proportion number);	--定义的存储过程
+
+end pack_emp;
+
+包里面还可以定义变量,常量,以及游标变量

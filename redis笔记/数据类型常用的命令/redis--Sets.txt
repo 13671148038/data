@@ -1,0 +1,22 @@
+Redis集是无序的字符串集合。该 SADD命令添加新的元素，一组。
+也可以针对诸如测试的集合执行许多其他操作，如果给定元素已经存在，执行交集，多个集合之间的联合或区别等等。
+
+
+   1. sadd myset 1 2 3    //添加元素
+
+   2. smembers myset      //查看myset里面的所有的元素
+
+   3. sismember myset 3    //查询'3'这个元素在myset里面是否存在,存在返回1, 不存在返回0
+
+   4. sinter myset myset2  //查询myset和myset2两个set集合的交集
+
+   5. spop myset [count]        //从set中随机删除一个元素,并返回该元素
+  
+   6. scard myset          //返回该set集合的长度
+
+   7. sunionstore deckall deck myset       //将集合deck,myset的并集复制到集合deckall中
+,
+   8. srandmember mysey [count]             //从集合中随机取出一个元素,但是不会从集合中删除这个元素,后面可以指定取出元素的个数
+ 
+
+

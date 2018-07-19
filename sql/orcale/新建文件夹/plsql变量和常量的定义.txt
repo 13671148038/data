@@ -1,0 +1,4 @@
+定义变量:
+例如:var_countryname varchar2(50):='中国';
+定义常量:
+例如:con_day constant intger:=365;/  使用关键字constant

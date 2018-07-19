@@ -1,0 +1,77 @@
+
+
+1: if...then
+例子:
+declare 
+  --定义两个字符串
+  var_name1 varchar2(50);
+  var_name2 varchar2(50);
+begin
+  -- 给两个定义的变量字符串复制
+  var_name1:='East';
+  var_name2:='xiaoke';
+  if length(var_name1)<length(var_name2) then
+    dbms_output.put_line('字符串'||var_name1||'的长度比字符串'||var_name2||'的长度小');
+    end if;
+end;
+
+
+2:if...then...else
+例子:
+declare 
+  --定义两个字符串
+  var_name1 varchar2(50);
+  var_name2 varchar2(50);
+begin
+  -- 给两个定义的变量字符串复制
+  var_name1:='East';
+  var_name2:='xiaoke';
+  if length(var_name1)<length(var_name2) then
+    dbms_output.put_line('字符串'||var_name1||'的长度比字符串'||var_name2||'的长度小');
+    end if;
+end;
+
+3:if...then...elsif
+例子:
+declare 
+  -- 定义变量
+  month integer:=10;
+begin
+  -- Test statements here
+  if month>0 and month<4 then
+    dbms_output.put_line('现在是春天');
+    elsif month>3 and month<7 then
+      dbms_output.put_line('现在是夏天');
+     elsif month>6 and month<10 then
+       dbms_output.put_line('现在是秋天');
+     elsif month>9 and month <13 then
+       dbms_output.put_line('现在是冬天');
+     else
+       dbms_output.put_line('月份不合法'); 
+     end if;    
+end;
+
+
+4:case语句:
+例子:
+declare 
+  -- Local variables here
+  season number:=3;
+  aboutinfo varchar2(50);
+begin
+  -- Test statements here
+  case season 
+    when 1 then
+      aboutinfo :=season||'季度包括 1,2,3 月份';
+    when 2 then
+      aboutinfo :=season||'季度包括 4,5,6 月份';
+    when 3 then
+      aboutinfo := season||'季度包括7,8,9 月份';
+    when 4 then
+      aboutinfo := season||'季度包括 10,11,12 月份';
+    end case;
+    dbms_output.put_line(season);
+end;
+
+
+

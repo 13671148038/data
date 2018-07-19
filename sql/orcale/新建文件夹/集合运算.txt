@@ -1,0 +1,12 @@
+SQL> /*
+SQL> 查询10和20号部门的员工
+SQL> 1. select * from emp where deptno=10 or deptno=20;
+SQL> 2. select * from emp where deptno in (10,20);
+SQL> 3. 集合运算
+SQL>     select * from emp where deptno=10
+SQL>       加上
+SQL>     select * from emp where deptno=20
+SQL> */
+SQL> select * from emp where deptno=10
+  2  union
+  3  select * from emp where deptno=20;

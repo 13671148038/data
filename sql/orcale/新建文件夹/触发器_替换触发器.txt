@@ -1,0 +1,26 @@
+替换触发器-----即instead of触发器,他的关键是instead of,而不是before或者after.与其他类型触发器不同的是,
+替换触发器是定义在视图上的.由于视图一般是由多基表连接组成的逻辑结构,多以一般不予许用户对视图进行插入,更新,删除等操作.
+第一步创建视图用以建立替换触发器:
+create or replace view view_emp_dept as
+  select empno,ename,dept.deptno,dname,job,hiredate
+    from emp,dept
+    where emp.deptno=dept.deptno;
+
+第二步:
+创建替换触发器:
+create or replace trigger tri_insert_view
+  instead of insert
+  on view_emp_dept 
+  for each row
+declare
+  -- local variables here
+  row_dept dept%rowtype;
+begin
+     select * into row_dept from dept where deptno = :new.deptno;
+     if sql%notfound then
+       insert into dept(deptno,dname)
+       values(:new.deptno,:new.ename);
+     end if;
+     insert into emp(empno,ename,deptno,job,hiredate)
+     values(:new.empno,:new.ename,:new.deptno,:new.job,:new.hiredate);  
+end tri_insert_view;

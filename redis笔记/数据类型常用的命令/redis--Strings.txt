@@ -1,0 +1,54 @@
+   1. set mykey somevalue     //添加
+   2. get mykey               //查询
+
+
+   3. set mykey newval nx     //当键mykey 存在是设置失败,不存在时设置成功 
+   4. set mykey newval xx     //当键mykey 存在是设置成功,不存在时设置失败 
+
+   5. incr counter            //给键counter 的值自动加一,并返回加一后的值.
+   6. incrby counter  50      //给键counter 的值加50,并返回加50后的值.
+
+   7. decr counter            //给键counter 的值自动减一,并返回减一后的值.
+   8. decrby counter  50      //给键counter 的值减50,并返回减50后的值.
+
+   9. mset a 10 b 20 c 30     //在一条命令中设置多个键值对.
+   10. mget a b c              //在一条命令中查询多个键的值.
+
+   11. exists counter          //查询键counter是否存在, 存在返回1,  不存在返回0  
+   
+   12. del mykey               //删除指定的键, 如果该键存在则删除并返回1, 不存在返回0
+
+   13. type mykey              //返回该键的值得类型,如果是字符串则返回String, 如果该键不存在赶回none
+
+   14.关于Redis的一些快速信息过期：
+     它们可以使用秒或毫秒精度进行设置。
+     然而，到期时间分辨率总是1毫秒。
+     有关过期的信息将被复制并保存在磁盘上，当您的Redis服务器保持停止状态
+    （这意味着Redis保存密钥过期的日期）时，虚拟时间将会过去。
+
+   15. expire mykey 5              //设置键mykey的过期时间为5秒,返回1或者0
+   16. persist mykey                //取消键mykey的过期时间
+
+   17. set key 100 ex 10            //创建带有过期时间的键  单位是秒
+
+   18. ttl key                      //查看键的剩余时间,单位是秒  如果键没有过期时间返回-1 ,如果键不存在了返回-2
+
+   19. pexpire mykey 5            //设置键mykey的过期时间为5毫秒,返回1或者0
+
+   18. pttl key                      //查看键的剩余时间,单位是毫秒  如果键没有过期时间返回-1 ,如果键不存在了返回-2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    

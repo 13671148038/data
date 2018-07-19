@@ -1,0 +1,160 @@
+@(page:PageInfo[FileInfo],pageCount:Int,fileSearch:FileSearch,userId:String,highSearch:Boolean)
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分布式数据管理平台</title>
+    <meta  name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <script src='@routes.Assets.at("js/jquery.min.js")' type="text/javascript"></script>
+</head>
+<body>
+<div>
+						<input type="text" id="keyWord"  class="search_input" class="" style="width:200px;height: 38px;margin-right: 20px;" name="fileName" value="@fileSearch.fileName" />
+						<div id="selectContent" style="margin-left: 80px;width: 200px; height:255px;display:none;position: absolute;background-color: white;overflow:auto;border: 1px solid #CCC">
+                            <div id="record"></div>
+                            <div id="deleteRecord" onclick="deleteRecord()" style="text-align: center;color: #CCC">清空浏览记录</div>
+                        </div>
+</div>
+<script type="text/javascript">
+//根据用户名存储不同用户的所搜记录
+    var userId = '@userId'
+
+
+
+    $("#keyWord").click(function (e) {
+        stopPropagation(e)
+        $("#record").empty();
+        //获取kookie
+        var cookie = {};
+        var all = document.cookie
+        if(all){
+            var list = all.split(";")
+            for(var i =0;i<list.length;i++){
+                var c =list[i]
+                var p = c.indexOf("=")
+                var name=c.substring(0,p)
+                var value = c.substring(p+1)
+                value = decodeURIComponent(value)
+                cookie[name]=value;
+            }
+        }
+        var record = cookie[userId]
+        record = $.trim(record)
+        if (record){
+            var list = record.split("-")
+            var item = "";
+            $.each(list,function (index, value) {
+                item+='<div style="color: black" onclick="selectItem(this)">'+value+'</div>'
+            })
+            $("#record").append(item);
+            $("#selectContent").show()
+        }
+    })
+    function selectItem(info){
+            $("#keyWord").val(info.innerText)
+            $("#selectContent").hide()
+    }
+
+    //删除历史记录
+    function deleteRecord(){
+        //获取kookie
+        var cookie = {};
+        var all = document.cookie
+        if(all){
+            var list = all.split(";")
+            for(var i =0;i<list.length;i++){
+                var c =list[i]
+                var p = c.indexOf("=")
+                var name=c.substring(0,p)
+                var value = c.substring(p+1)
+                value = decodeURIComponent(value)
+                cookie[name]=value;
+            }
+        }
+        //删除浏览记录
+        cookie[userId]=encodeURIComponent(" ")
+        var res = JSON.stringify(cookie)
+        res = res.replace(/\":\"/g,"=")
+        res = res.replace(/\",\"/g,";")
+        res = res.replace(/{\"/g,"")
+        res = res.replace(/\"}/g,"")
+        document.cookie =res;
+        $("#selectContent").hide()
+    }
+
+	//存储浏览记录
+    function checkTab(){
+            //获取kookie
+            var cookie = {};
+            var all = document.cookie
+            if(all){
+                var list = all.split(";")
+                for(var i =0;i<list.length;i++){
+                    var c =list[i]
+                    var p = c.indexOf("=")
+                    var name=c.substring(0,p)
+                    var value = c.substring(p+1)
+                    value = decodeURIComponent(value)
+                    cookie[name]=value;
+                }
+            }
+            var c = cookie[userId]
+            var list = []
+            if(c){
+                list = c.split("-")
+            }
+
+            //判断搜索记录有没有相同的
+            $.each(list,function (index, value) {
+                if(keyWord==value){
+                    list.splice(index,1)
+                }
+            })
+
+            var num = list.length
+            if(num<10){
+                list.unshift(keyWord)
+            }else{
+                list.pop();
+                list.unshift(keyWord)
+            }
+            var js = "";
+            num = list.length
+            $.each(list,function (index, value) {
+                if(num==index+1){
+                    js+=value
+                }else{
+                    js+=(value+"-")
+                }
+            })
+
+            cookie[userId]=encodeURIComponent(js)
+            var res = JSON.stringify(cookie)
+            res = res.replace(/\":\"/g,"=")
+            res = res.replace(/\",\"/g,";")
+            res = res.replace(/{\"/g,"")
+            res = res.replace(/\"}/g,"")
+            document.cookie =res;
+        }
+    }
+
+
+
+
+    function stopPropagation(e) {
+        if (e.stopPropagation)
+            e.stopPropagation();
+        else
+            e.cancelBubble = true;
+    }
+
+    $(document).bind('click',function(){
+        $('#selectContent').css('display','none');
+    });
+
+    $('#selectContent').bind('click',function(e){
+        stopPropagation(e);
+    });
+
+</script>
+</body>
+</html>

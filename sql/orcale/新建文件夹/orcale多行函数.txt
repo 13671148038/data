@@ -1,0 +1,12 @@
+SQL> --工资总额
+SQL> select sum(sal) from emp;
+
+SQL> --人数
+SQL> select count(*) from emp;
+
+SQL> --平均工资
+SQL> select sum(sal)/count(*) 一,avg(sal) 二 from emp;
+
+SQL> select count(*), count(comm) from emp;
+
+ --where和having的区别：where不能使用多行函数

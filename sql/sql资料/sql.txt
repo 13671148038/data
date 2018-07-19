@@ -1,0 +1,21 @@
+添加字段:alter table 表名字 add 字段名字 varchar(32) 约束; 约束包括:not null非空;default '0' 默认值;primary key,主键, comment '说明,注释';AUTO_INCREMENT自增长 等等
+
+添加外键约束:alter table 表名字 add constraint 外键别名 foreign key(外键字段名字) references 父表(主键名字);这是没有级联删除和更新的
+添加外键约束:alter table 表名字 add constraint 外键别名 foreign key(外键字段名字) references 父表(主键名字) on delete cascade on update cascade;这事有级联删除可更新的
+例子:alter table student add constraint student_fk_1 foreign key(banji_id) references banji(id); 主键和外键的字段类型和长度必须一致才能建立连接
+
+
+添加数据:insert into banji (bj_name,bj_tec) values('五年级二班','刘老师'),('五年级一班','范老师'),('五年级三班','朱老师')
+
+
+
+alter table asynch_task ADD KEY comp_index (code);
+alter table asynch_task modify code BIGINT(20) auto_increment; 
+
+
+
+创建自增长字段
+alter table tm_work_graphics ADD KEY comp_index (number)
+
+alter table tm_work_graphics modify number BIGINT(15) auto_increment
+

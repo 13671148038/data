@@ -1,0 +1,25 @@
+
+
+1.隐式游标的遍历:
+declare 
+  -- Local variables here
+begin
+  -- Test statements here
+  for aaa in (select * from emp) loop
+    dbms_output.put_line(aaa.empno);
+  end loop;
+end;
+
+2.显示游标的遍历:
+declare 
+  -- Local variables here
+  cursor cur_emo is
+  select * from emp;
+begin
+  -- Test statements here
+  for aaa in cur_emo loop
+    dbms_output.put_line(aaa.ename);
+  end loop;  
+end;
+
+备注:在使用游标(包括显示和隐式游)的FOR循环中,可以声明游标,但是不能进行打开游标,读取游标和关闭游标等操作.因为这些有Orcale系统自动完成.

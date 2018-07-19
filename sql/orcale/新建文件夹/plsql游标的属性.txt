@@ -1,0 +1,4 @@
+%found: 布尔类型属性,如果SQL语句至少影响到一行数据,则该属性为true,否则为false.
+%notfound: 布尔类型属性,与%found属性的功能相反.
+%rowcount: 数字类型属性,返回受SQL语句影响的行数.
+%isopen: 布尔类型属性, 当游标已经打开是放回true,游标福安比是则为false.

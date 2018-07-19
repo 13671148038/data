@@ -1,0 +1,92 @@
+orcale的数据类型:
+
+
+基本数据类型:
+1.数值类型:
+number 可以存储整数和浮点数.
+pls_integer和binary_integer 这两个只能存储整数
+
+2.字符串类型
+varchar2:用于存储可变的字符串,没有默认长度,定义的时候必须指定长度,语法varchar2(maxlength)
+char:标识指定长度的字符串,语法:char(maxlength),如果没有指定默认是1,如果给的字符串没有指定的长度大则后面用空格补齐;
+long:一个可变的字符串,最大长度是2G,所有的字符串都可以用它来存储.
+nchar和nvarchar2:pl/sql.8 以后才加入的类型他们的长度是根据各国字符集来确定,只能具体情况具体分析.
+date:日期类型,存储七个字节,分别代表:世纪,年,月,日,时,分,秒.
+booleam:可以使true,false和null;
+
+
+特殊数据类型:
+%type:可以声明一个与指定列相同的数据类型,例子:var_job emp.job%type;
+
+recode:可以存储有多个列值组成的一行数据:
+语法:
+type recode_type is recode
+(
+var_member1 varchar2(20),
+car_age number
+)
+例子:
+-- Created on 2017/9/11 by MYPC 
+declare 
+  -- Local variables here
+  type record_type is record
+  (
+   var_ename emp.ename%type,
+   var_sal emp.sal%type
+   );
+   empinfo record_type;
+begin
+  -- Test statements here
+  select ename,sal into empinfo from emp where empno=7839;
+  dbms_output.put_line(empinfo.var_ename||'薪水是'||empinfo.var_sal);
+end;
+打印的结果是:KING薪水是5000
+
+%rowtype类型:结合了"%type"和"recode"变量的优点,他可以表中行的结果定义一种特殊的数据类型,用来存储从数据库表中检索到的一行数据.
+语法:var_name emp%rowtype;
+例子:
+-- Created on 2017/9/11 by MYPC 
+declare 
+  -- Local variables here
+  emp_row emp%rowtype;
+begin
+  -- Test statements here
+  select * into emp_row from emp where empno=7839;
+  dbms_output.put_line(emp_row.ename||'薪水是'||emp_row.sal);
+end;
+打印的结果是:KING薪水是5000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

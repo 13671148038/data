@@ -1,0 +1,19 @@
+排序不可重复的集合排序规则是:
+首先是按照添加元素时设置的'分数'进行排序的,如果分数相同则再根据数据字典进行排序
+
+  1.  zadd hackers 1940 "Alan Kay"     //添加元素  中间的数字是分数, 就是用来排序的
+
+  2.  zrange hackers 0 -1                 // 获取所有元素,并且按照升序进行排序
+
+  3.  zrevrange hackers 0 -1              //获取所有元素,并且按照降序进行排序
+
+  4.  zrange hackers 0 -1 withscores           //返回的结果带有分数
+   
+  5.  zrangebyscore hackers -inf 1950       //返回分数小于等于1950的元素其中"-inf" 表示负无穷
+
+  6.  zremrangebyscore hackers 1940 1960         //删除分数在1940和1960之间的元素, 并且返回删除的数量
+
+  7.  zrank hackers "Anita Borg"              //返回元素的位置
+
+  8.  zrangebylex hackers [B [P              //按照数据字典进行查询,首字母在 B 和 P 之间的元素
+  
