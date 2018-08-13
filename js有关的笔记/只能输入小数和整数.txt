@@ -15,3 +15,14 @@
             return  r;
         }
     }
+
+
+   //只能输入数字之整数
+        function jiaoyanint(value) {
+            var r = parseInt(value).toString()
+            if (parseInt(value).toString() == "NaN") {
+                return "";
+            } else {
+                return  r;
+            }
+        }
