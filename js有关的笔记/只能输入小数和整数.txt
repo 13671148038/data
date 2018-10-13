@@ -1,0 +1,28 @@
+  //只能输入数字校验
+    function jiaoyan(value) {
+        var r = parseFloat(value).toString()
+        if (parseFloat(value).toString() == "NaN") {
+            return 0;
+        } else {
+            if(value.indexOf(".") != -1){
+                var len =  r.split(".").length
+                if(len>1){
+                    return  r;
+                }else {
+                    return  r+".";
+                }
+            }
+            return  r;
+        }
+    }
+
+
+   //只能输入数字之整数
+        function jiaoyanint(value) {
+            var r = parseInt(value).toString()
+            if (parseInt(value).toString() == "NaN") {
+                return "";
+            } else {
+                return  r;
+            }
+        }
