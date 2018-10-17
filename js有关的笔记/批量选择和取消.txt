@@ -1,0 +1,8 @@
+ /*批量选择功能*/
+		$("#batch").click(function(){
+            var statue = this.checked
+            var all = $("input[name='id']")
+			$.each(all,function(index,value){
+			   value.checked=statue
+			})
+		})

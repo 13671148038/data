@@ -17,3 +17,12 @@
 9.toLocaleString();获取本地的时间格式字符串
 
 10.getDay();获取当前星期   外国星期日为第一天 所以星期日为0  其他的1-6一一对应
+
+
+ function fmtDate(date ){
+        //var date =  new Date(obj);
+        var y = 1900+date.getYear();
+        var m = "0"+(date.getMonth()+1);
+        var d = "0"+date.getDate();
+        return y+"-"+m.substring(m.length-2,m.length)+"-"+d.substring(d.length-2,d.length);
+    }
