@@ -1,0 +1,21 @@
+public static List<String> getZiJiGoodClassId(List<String> ids){
+		List<String> ziId = new ArrayList<>();
+		if(ids!=null && ids.size()>0){
+			//获取最底级的分类id 逻辑:把每一个行业id跟所有的id进行一一比较,如果该id包含在其他任何一个id里面就表示不是最低级
+			for (String id:ids) {
+				int bs= 0;
+				for (String id2:ids) {
+					if (!id.equals(id2)){
+						int index = id2.indexOf(id, 0);
+						if(index==0){
+							bs=1;
+						}
+					}
+				}
+				if(bs==0){
+					ziId.add(id);
+				}
+			}
+		}
+		return ziId;
+	}
