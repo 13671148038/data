@@ -1,0 +1,13 @@
+京东的爬虫路径:
+  httpGet.setURI(  URI.create("https://p.3.cn/prices/mgets?skuIds=J_" + itemId)   );
+   只需要把后面的 itemId 变为商品的id就可以获取代价格了;可以多个
+
+淘宝的路径:
+这个是全路径但会的参数比较全
+String url = "https://detailskip.taobao.com/service/getData/1/p1/item/detail/sib.htm?itemId=537330014675&sellerId=2776190336&modules=dynStock,qrcode,viewer,price,duty,xmpPromotion,delivery,upp,activity,fqg,zjys,amountRestriction,couponActivity,soldQuantity,originalPrice,tradeContract&callback=onSibRequestSuccess";
+这个是指定获取参数的路径,后面的modules指定的字段分别是要返回的数据
+String url = "https://detailskip.taobao.com/service/getData/1/p1/item/detail/sib.htm?itemId=537330014675&modules=price,xmpPromotion,originalPrice";
+使用淘宝必须得指定请求头要不然会被拦截访问不到
+  httpGet.setHeader("Accept","*/*");
+  httpGet.setHeader("Referer","https://item.taobao.com/item.htm?id=537330014675&ali_trackid=2:mm_167860039_81800429_15620700198:1539757821_144_254978455&pvid=10_222.128.44.223_931_1539053262245");
+  httpGet.removeHeaders("Upgrade-Insecure-Requests");       
