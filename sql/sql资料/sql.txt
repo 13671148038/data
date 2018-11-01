@@ -19,3 +19,10 @@ alter table tm_work_graphics ADD KEY comp_index (number)
 
 alter table tm_work_graphics modify number BIGINT(15) auto_increment
 
+Ìí¼ÓË÷Òı 
+alter table image_table add index (yuantu)
+É¾³ıË÷Òı
+
+
+
+
