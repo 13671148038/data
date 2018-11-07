@@ -10,4 +10,16 @@ String url = "https://detailskip.taobao.com/service/getData/1/p1/item/detail/sib
 使用淘宝必须得指定请求头要不然会被拦截访问不到
   httpGet.setHeader("Accept","*/*");
   httpGet.setHeader("Referer","https://item.taobao.com/item.htm?id=537330014675&ali_trackid=2:mm_167860039_81800429_15620700198:1539757821_144_254978455&pvid=10_222.128.44.223_931_1539053262245");
-  httpGet.removeHeaders("Upgrade-Insecure-Requests");       
+  httpGet.removeHeaders("Upgrade-Insecure-Requests");   
+
+唯品会直接从页面返回：
+ <span class="pbox-price showthis" id="J_surpriseSprice_wrap654889948">
+            <i class="pbox-yen">&yen;</i><em class="J-price">26-45</em>   //优惠后的价格
+        </span>
+                        <div class="pi-dicount-box">
+                            <div class="pbox-off-box">
+                                <span class="pbox-off J-discount">7.6折起</span>
+                            </div>
+                            <span class="pbox-market">&yen;<del class="J-mPrice">29-59</del></span>//原价的价格
+                        </div>
+    
