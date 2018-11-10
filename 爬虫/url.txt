@@ -23,3 +23,8 @@ String url = "https://detailskip.taobao.com/service/getData/1/p1/item/detail/sib
                             <span class="pbox-market">&yen;<del class="J-mPrice">29-59</del></span>//原价的价格
                         </div>
     
+苏宁易购
+ //苏宁易购
+                    // 原链接 https://product.suning.com/0070079092/690098567.html
+                    // 获取价格的链接 https://pas.suning.com/nspcsale_0_000000000690098567_000000000690098567_0070073727_10_010_0100101.html?callback=pcData
+pcData({"code":"1","data":{"price":{"cacheMinute":"","saleInfo":[{"vipPrice":"","vendorCode":"0070073727","accountPlace":"","sendCityId":"","refPrice":"","processStat":"","noPriceCausation":"","balanceStartTime":"","onLineStatus":"","netPrice":"6299.00","warrantyList":{},"deptNo":"0001","finalPayment":"","salesOrg":"C","pgPrice":"","factorySendFlag":"0","plantCode":"ZE99","pgNum":"","businessField1":"","manageInvFlag":"5","promotionPrice":"5799.00","bookPrice":"","pgActionId":"","singlePrice":"","bookActionID":"","marketVipPriceType":"","marketVipPrice":"","sendAvalidTime":"1541649037000","serveCodeList":{},"rentPrice":"","bookGoodID":"","usePrice":"","vendorType":"921C店","balanceEndTime":"","invStatus":"1","chargePlantCode":"","bookPriceSwell":"","juId":"","partNumber":"000000000690098567","noPriceCode":"","priceType":"1","ownerPlace":"ZE99","vendor":"0070073727","govPrice":"","purChaseType":""}]},"pcMsg":[{"pcNewCouponsFlag":"0","https":"0"}],"marketVipPriceType":"","isnpri":"1","nowTime":1541649037000,"nt":1541649037.111,"isOp":"1","flag":"0","respTime":"priceTime-10,fimsTime-0,solpTime-0,treatyTime-0","freightObj":{"snslt":"0","fare":"-1","freight":"{}"},"deliverableFlag":"Y","isCShop":"Y","invStatus":"0-4"},"api":"pcitemsale"}) 
