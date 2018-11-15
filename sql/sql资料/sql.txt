@@ -23,6 +23,20 @@ alter table tm_work_graphics modify number BIGINT(15) auto_increment
 alter table image_table add index (yuantu)
 删除索引
 
+//字段添加注释
+alter table `tb_code_collection_process_2018` change `process_id` `process_id` int(11) comment '主键id';
+alter table `tb_code_collection_process_2019` change `process_id` `process_id` int(11) comment '主键id';
+alter table `tb_code_collection_process_2018` change `processor` `processor` varchar(200) comment '处理程序标识';
+alter table `tb_code_collection_process_2019` change `processor` `processor` varchar(200) comment '处理程序标识';
+
+//表添加注释
+ALTER TABLE tb_code_collection_process_2018 COMMENT='条形码批量处理信息(批量录入条形码，机器人批量检测条码中心接口后入库)'; 
+ALTER TABLE tb_code_collection_process_2019 COMMENT='条形码批量处理信息(批量录入条形码，机器人批量检测条码中心接口后入库)';  
+
+
+
+
+
 
 
 
