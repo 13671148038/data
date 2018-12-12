@@ -1,0 +1,24 @@
+//部署项目
+scrapyd-deploy <target> -p <project> --version <version>
+scrapyd-deploy  -p zxsdisno  --version 1.0.0
+
+//调度项目
+curl http://localhost:6800/schedule.json -d project=zxsdisno  -d  spider=demo
+
+//列出项目
+curl http://localhost:6800/listprojects.json
+
+//列出版本
+curl http://localhost:6800/listversions.json?project=zxsdisno
+
+//列出爬虫
+curl http://localhost:6800/listspiders.json?project=zxsdisno
+
+//列出job
+curl http://localhost:6800/listjobs.json?project=zxsdisno
+
+//删除版本
+ curl http://localhost:6800/delversion.json -d project=zxsdisno -d version=r99
+
+//删除项目
+curl http://localhost:6800/delproject.json -d project=zxsdisno

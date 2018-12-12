@@ -1,4 +1,6 @@
 添加字段:alter table 表名字 add 字段名字 varchar(32) 约束; 约束包括:not null非空;default '0' 默认值;primary key,主键, comment '说明,注释';AUTO_INCREMENT自增长 等等
+alter table tb_cps_advert add product_id int(20) default 1 COMMENT '标签状态 1:显示 2:隐藏'; 
+
 
 添加外键约束:alter table 表名字 add constraint 外键别名 foreign key(外键字段名字) references 父表(主键名字);这是没有级联删除和更新的
 添加外键约束:alter table 表名字 add constraint 外键别名 foreign key(外键字段名字) references 父表(主键名字) on delete cascade on update cascade;这事有级联删除可更新的
