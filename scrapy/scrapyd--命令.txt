@@ -2,8 +2,12 @@
 scrapyd-deploy <target> -p <project> --version <version>
 scrapyd-deploy  -p zxsdisno  --version 1.0.0
 
+
+
 //调度项目
 curl http://localhost:6800/schedule.json -d project=zxsdisno  -d  spider=demo
+
+curl http://localhost:6800/schedule.json -d project=noycbaidusino  -d  spider=ycdemo
 
 //列出项目
 curl http://localhost:6800/listprojects.json
@@ -22,3 +26,5 @@ curl http://localhost:6800/listjobs.json?project=zxsdisno
 
 //删除项目
 curl http://localhost:6800/delproject.json -d project=zxsdisno
+
+curl http://localhost:6800/delproject.json -d project=noycbaidusino
