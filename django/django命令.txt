@@ -8,10 +8,16 @@ django-admin startproject mysite
 python manage.py startapp polls
 
 启动项目
-python manage.py startapp polls
+python manage.py runserver
 
 创建表
 python manage.py migrate
 
 models修改时运行就会修改表结构
 python manage.py makemigrations polls
+python manage.py migrate
+
+创建超级管理员用户
+python manage.py createsuperuser
+
+
