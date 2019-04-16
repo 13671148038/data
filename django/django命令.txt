@@ -17,6 +17,7 @@ models修改时运行就会修改表结构
 python manage.py makemigrations polls
 python manage.py migrate
 
+
 指定后面修改的版本 就会打印出要执行的sql语句
 python manage.py sqlmigrate polls 0001
 
@@ -26,4 +27,8 @@ python manage.py createsuperuser
 输入账号:
 Username: admin
 密码:
+
+创建超级管理员用户
+python manage.py createsuperuser
+
 
