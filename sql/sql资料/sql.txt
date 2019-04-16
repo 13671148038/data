@@ -22,14 +22,29 @@ alter table tm_work_graphics ADD KEY comp_index (number)
 alter table tm_work_graphics modify number BIGINT(15) auto_increment
 
 添加索引 
-alter table image_table add index (yuantu)
-删除索引
+alter table image_table add index (yuantu,sdcsd)
+添加联合索引
+create index 索引名 on 表名（字段名1，字段名2）
+create index t1_username_password on tb_code_collection_process_2018(batch_id,code_number)
 
+添加唯一索引
+create  UNIQUE  index 索引名 on 表名（字段名1，字段名2）
+CREATE UNIQUE INDEX catename ON wb_blog(catid); 
+
+
+
+删除索引
+drop index index_name on table_name ;
+
+alter table table_name drop index index_name 
 //字段添加注释
 alter table `tb_code_collection_process_2018` change `process_id` `process_id` int(11) comment '主键id';
 alter table `tb_code_collection_process_2019` change `process_id` `process_id` int(11) comment '主键id';
 alter table `tb_code_collection_process_2018` change `processor` `processor` varchar(200) comment '处理程序标识';
 alter table `tb_code_collection_process_2019` change `processor` `processor` varchar(200) comment '处理程序标识';
+
+alter table tb_cps_advert2 modify column pc_link_url varchar(1000) COMMENT 'pc图片路径';
+alter table tb_barcode_2  modify column brandStatus int(4) default '0' comment '品牌状态0是未匹配，1是匹配';
 
 //表添加注释
 ALTER TABLE tb_code_collection_process_2018 COMMENT='条形码批量处理信息(批量录入条形码，机器人批量检测条码中心接口后入库)'; 

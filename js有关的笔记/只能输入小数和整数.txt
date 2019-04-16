@@ -1,15 +1,22 @@
   //Ö»ÄÜÊäÈëÊı×ÖĞ£Ñé
-    function jiaoyan(value) {
-        var r = parseFloat(value).toString()
+function jiaoyan(value) {
+        var r = parseFloat(value).toString();
+        var e = "";
+        if((value+"").length>1){
+            var b = value.substring(value.length-1)=="0";
+            if(b){
+                e="0";
+            }
+        }
         if (parseFloat(value).toString() == "NaN") {
             return 0;
         } else {
             if(value.indexOf(".") != -1){
-                var len =  r.split(".").length
+                var len =  r.split(".").length;
                 if(len>1){
-                    return  r;
+                    return  r+e;
                 }else {
-                    return  r+".";
+                    return  r+"."+e;
                 }
             }
             return  r;

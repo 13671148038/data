@@ -1,0 +1,3 @@
+ function linkUrlJy(obj){
+        obj.value=obj.value.replace(/[\u4E00-\u9FA5]|[\uFE30-\uFFA0]/g,'');
+    }

@@ -8,10 +8,22 @@ django-admin startproject mysite
 python manage.py startapp polls
 
 启动项目
-python manage.py startapp polls
+python manage.py runserver
 
 创建表
 python manage.py migrate
 
 models修改时运行就会修改表结构
 python manage.py makemigrations polls
+python manage.py migrate
+
+指定后面修改的版本 就会打印出要执行的sql语句
+python manage.py sqlmigrate polls 0001
+
+
+创建用户用来管理models
+python manage.py createsuperuser
+输入账号:
+Username: admin
+密码:
+
