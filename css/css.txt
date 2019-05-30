@@ -2,7 +2,7 @@
 
 超过制定宽度后采用...来显示：overflow: hidden;text-overflow:ellipsis; white-space: nowrap;需要加宽度，即width样式，可以显示   
 
-a{display: inline-block;}当a标使用这个样式的时候,a标签就可以设置宽度了
+a{display: inline-block;}当a标使用这个样式的时候，  a标签就可以设置宽度了
 
 
 //div的高度随着窗口的大小改变而改变
