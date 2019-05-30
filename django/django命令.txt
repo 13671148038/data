@@ -8,7 +8,7 @@ django-admin startproject mysite
 python manage.py startapp polls
 
 启动项目
-python manage.py runserver
+python manage.py runserver    
 
 创建表
 python manage.py migrate
