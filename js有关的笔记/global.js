@@ -87,9 +87,14 @@ function fmtDate2(date) {
     return y + "-" + m.substring(m.length - 2, m.length) + "-" + d.substring(d.length - 2, d.length) + " " + h.substring(h.length - 2, h.length) + ":" + mm.substring(mm.length - 2, mm.length) + ":" + s.substring(s.length - 2, s.length);
 }
 
-
+//只能输入整数的校验
 function numJy(obj) {
     obj.value = obj.value.replace(/[^\d]/g, '');
 }
+
+//小数校验 isNaN()函数判断当前值是不是数字(包括小数),是数字返回false, 不是数字返回true
+isNaN();
+//将任何类型转换成数字类型,配合isNaN()函数使用
+Number();
 
 
