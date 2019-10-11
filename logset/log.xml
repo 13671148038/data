@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <configuration>
+    <property name="logback.logdir" value="log"></property>
+    <property name="logback.appname" value="ykq"></property>
     <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
         <!--展示格式 layout-->
         <layout class="ch.qos.logback.classic.PatternLayout">
