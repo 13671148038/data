@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <configuration>
-    <appender name="consoleLog1" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
         <!--展示格式 layout-->
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>%d -1 %msg%n</pattern>
@@ -66,6 +66,7 @@
     <!--指定最基础的日志输出级别-->
     <root level="INFO">
         <!--appender将会添加到这个loger-->
+        <appender-ref ref="consoleLog"/>
         <appender-ref ref="fileInfoLog"/>
         <appender-ref ref="fileErrorLog"/>
     </root>
