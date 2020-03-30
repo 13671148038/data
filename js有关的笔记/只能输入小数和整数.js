@@ -43,3 +43,8 @@ function jiaoyan(value) {
       obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3'); //只能输入两个小数
   }
 
+  //只能输入整数的校验
+  function numJy(obj) {
+      obj.value = obj.value.replace(/[^\d]/g, '');
+  }
+
