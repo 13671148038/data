@@ -1,1 +1,15 @@
-grep
+清屏: clear
+查看文件病显示行号:cat -n ykq-tuangou.20190920.log | grep -C 3 'exception'     (cat 后面的 -n  就是显示的行号)  cat -n ykq-tuangou.20190920.log | grep -C 3 'exception'
+在指定的行号之间进行插叙关键字:sed -n '488335,488336p' ykq-tuangou.20190920.log | grep 'at'
+
+sed -n '71276,75000p' ykq-tuangou.20191212.log | grep 'DuplicateKeyException'
+
+MedicinesController,method:toAdd()
+
+
+sed -n '84230,84271p' ykq-tuangou.20191106.log | grep 'MedicinesController,method:toAdd()'
+
+:sed -n '1884238,2032310p' tuangou-manager.20200414.log | grep -C3 'SAASStockMsgListenerProcessor medicinesCode'
+
+
+bugfix_04142213

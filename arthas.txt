@@ -1,0 +1,5 @@
+sudo su - app
+
+java -jar arthas-boot.jar
+
+trace 包名.类名 方法名
