@@ -12,6 +12,7 @@ git stash pop
 git  reset  --soft  HEAD
 git  reset  --mixed  HEAD
 git  reset --hard  HEAD
+git push origin HEAD --force
 
 
 git  revert -n  版本号
