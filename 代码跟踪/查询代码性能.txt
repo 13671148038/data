@@ -1,0 +1,27 @@
+curl -O https://alibaba.github.io/arthas/arthas-boot.jar
+
+
+
+sudo su - app
+java -jar arthas-boot.jar
+trace com.xyy.tuangou.miniapp.controller.YkqMiniGroupAreaController searchMedicines
+trace 包名.类名 方法名
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
