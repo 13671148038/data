@@ -17,3 +17,7 @@ git push origin HEAD --force
 
 git  revert -n  版本号
 
+
+//swagger不拦截
+"/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**"
+
