@@ -9,15 +9,26 @@
 git stash push
 git stash pop
 
+git commit --amend  修改注释
+git reset --hard 44f994dd8fc1e10c9ed557824cae50d1586d0cb3 回退到某个版本
 git  reset  --soft  HEAD
 git  reset  --mixed  HEAD
 git  reset --hard  HEAD
 git push origin HEAD --force
 
+git checkout v2 -b branchName 检出某个版本作为新分支
 
-git  revert -n  版本号
 
+git  revert -n  版本号   撤销某个版本提交的内容
 
 //swagger不拦截
 "/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**"
+
+
+
+
+
+
+
+
 
