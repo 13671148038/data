@@ -6,8 +6,8 @@
 
 创建本地分支,并提交到远程:1:git checkout -b  a; 2:git push --set-upstream origin c
 
-git stash push
-git stash pop
+git stash push   隐藏当前修改
+git stash pop    显示当前修改
 
 git commit --amend  修改注释
 git reset --hard 44f994dd8fc1e10c9ed557824cae50d1586d0cb3 回退到某个版本
